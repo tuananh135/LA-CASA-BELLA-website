@@ -1,3 +1,132 @@
-<h1 class="mt-4">Dashboard</h1>
-<p class="lead mb-3">Welcome <%= user.name %></p>
-<a href="/users/logout" class="btn btn-secondary">Logout</a>
+<% include ./partials/header %>
+    <% include ./partials/sidebar %>
+        <div class="content">
+            <div class="row">
+                <div class="col-12">
+                    <% let heading='' ; switch (page) { case 'home' : heading='Trang chủ' ; break; case 'about' :
+                        heading='Chúng tôi là ai?' ; break; case 'service' : heading='Chúng tôi làm gì?' ; break;
+                        case 'contact' : heading='Liên hệ với chúng tôi' ; break; case 'news' : heading='Tin tức' ;
+                        break; default: break; } %>
+                        <h5>
+                            <%=heading%>
+                        </h5>
+
+                        <% if (page==='about' ) { %>
+                            <fieldset class="p-3">
+                                <form>
+                                    <div class="form-group">
+                                        <label for="heading">Tiêu đề:</label>
+                                        <textarea class="form-control" placeholder="Nhập tiêu đề" rows="4"
+                                            id="heading"></textarea>
+                                    </div>
+                                    <div class="form">
+                                        <label for="editor">Nội dung:</label>
+                                        <textarea class="form-control" placeholder="Nhập nội dung" rows="15"
+                                            id="editor"></textarea>
+                                    </div>
+                                </form>
+                            </fieldset>
+                            <% } %>
+                                <% if (page==='home' ) { %>
+                                    <div class="p-3">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Ảnh</th>
+                                                    <th>Thao tác</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <% background.forEach(element => { %>
+                                                    <tr>
+                                                            <td class="pl-4">
+                                                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                            </td>
+                                                            <td>
+                                                                <img src="<%=element.fullpath%>" width="100" alt=""/>
+                                                            </td>
+                                                            <td>
+                                                                <i class="fa fa-edit mr-2"></i>
+                                                                <i class="fa fa-arrow-up mr-2"></i>
+                                                                <i class="fa fa-arrow-down"></i>
+                                                            </td>
+                                                        </tr>
+                                                <% }) %>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <% } %>
+                                        <!-- <div class="card">
+                            <div class="card-body" id="wrapper">
+                                <ul class="nav nav-tabs">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" data-toggle="collapse" data-target="#content1"
+                                            aria-expanded="true" aria-controls="content1" id="1"
+                                            onclick="handleChangeTab(1)">Nội
+                                            dung</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" data-toggle="collapse" data-target="#content2"
+                                            aria-expanded="true" aria-controls="content2" id="2"
+                                            onclick="handleChangeTab(2)">Ảnh
+                                            nền</a>
+                                    </li>
+                                </ul>
+                                <div>
+                                    <div id="content1" data-parent="#wrapper" class="collapse show">
+                                        <form class="form p-3">
+                                            <div class="form-group">
+                                                <label for="heading">Tiêu đề:</label>
+                                                <textarea class="form-control" id="heading"></textarea>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="content">Nội dung:</label>
+                                                <textarea class="form-control" id="content"></textarea>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div id="content2" data-parent="#wrapper" class="collapse">
+                                        <h2>Content 2</h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> -->
+                </div>
+            </div>
+        </div>
+        <script src="https://cdn.tiny.cloud/1/r22hj5iot4r5z5wsadtse1lse4jdgk3b6xa1njp93fzao1z7/tinymce/5/tinymce.min.js"
+            referrerpolicy="origin"></script>
+        <script>
+            function handleChangeTab(params) {
+                let navs = document.getElementsByClassName('nav-link')
+                for (var i = 0; i < navs.length; i++) {
+                    navs[i].className = 'nav-link';
+                }
+                document.getElementById(params.toString()).className += " active disabled";
+            }
+            tinymce.init({
+                selector: '#editor',
+                menubar: false,
+                statusbar: false,
+                plugins: 'autoresize anchor autolink charmap code codesample directionality fullpage help hr image imagetools insertdatetime link lists media nonbreaking pagebreak preview print searchreplace table template textpattern toc visualblocks visualchars',
+                toolbar: 'bold italic strikethrough blockquote bullist numlist backcolor | link image media | removeformat help fullscreen ',
+                skin: 'bootstrap',
+                toolbar_drawer: 'floating',
+                min_height: 200,
+                autoresize_bottom_margin: 16,
+                setup: (editor) => {
+                    editor.on('init', () => {
+                        editor.getContainer().style.transition = "border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out"
+                    });
+                    editor.on('focus', () => {
+                        editor.getContainer().style.boxShadow = "0 0 0 .2rem rgba(0, 123, 255, .25)",
+                            editor.getContainer().style.borderColor = "#80bdff"
+                    });
+                    editor.on('blur', () => {
+                        editor.getContainer().style.boxShadow = "",
+                            editor.getContainer().style.borderColor = ""
+                    });
+                }
+            });
+        </script>
