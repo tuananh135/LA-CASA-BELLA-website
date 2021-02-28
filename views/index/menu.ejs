@@ -1,0 +1,44 @@
+<nav class="nav__cont" id="nav__container">
+    <div class="nav__control">
+        <div class="menu-btn" onclick="toggleMenu()">
+            <span class="menu-btn-line"></span>
+            <span class="menu-btn-line"></span>
+            <span class="menu-btn-line"></span>
+        </div>
+        <div class="link-contact text-center align-items-end">
+            <a href="https://vi-vn.facebook.com/">
+                <img src="/dist/images/icons/facebook.svg" width="20" alt="linkfacebook"/>
+            </a>
+        </div>
+    </div>
+    <div class="nav__body">
+        <div class="close-btn" onclick="toggleMenu()">
+            <span class="close-btn-line"></span>
+            <span class="close-btn-line"></span>
+        </div>
+        <ul class="nav flex-column">
+            <li class="active">
+                <a href="#">Trang chủ</a>
+            </li>
+            <li>
+                <a href="#">Chúng tôi là ai?</a>
+            </li>
+            <li>
+                <a href="#">Chúng tôi làm gì?</a>
+            </li>
+            <li>
+                <a href="#">Tin tức</a>
+            </li>
+            <li>
+                <a href="#">Liên hệ với chúng tôi</a>
+            </li>
+        </ul>
+        <div></div>
+    </div>
+</nav>
+<script>
+    function toggleMenu() {
+        const nav = document.getElementById('nav__container');
+        nav.classList.toggle("nav__on");
+    }
+</script>

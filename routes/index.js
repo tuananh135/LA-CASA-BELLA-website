@@ -4,7 +4,7 @@ const { ensureAuthenticated } = require('../config/auth');
 const BackgroundController = require('../controllers/background.controller');
 
 // Welcome Page
-// router.get('/', forwardAuthenticated, (req, res) => res.render('welcome'));
+router.get('/', (req, res) => res.render('welcome'));
 
 // Dashboard
 router.get('/admin', (req, res) => {

@@ -38,10 +38,13 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <% background.forEach(element => { %>
+                                                <%                                                
+                                                    background.forEach(element => { %>
                                                     <tr>
                                                             <td class="pl-4">
-                                                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                                <input class="form-check-input select-background" <% if (element.active) { %>
+                                                                    checked
+                                                                <% } %> type="checkbox" id="<%=element.id%>">
                                                             </td>
                                                             <td>
                                                                 <img src="<%=element.fullpath%>" width="100" alt=""/>
@@ -55,56 +58,15 @@
                                                 <% }) %>
                                             </tbody>
                                         </table>
+                                        <div><button class="btn btn-success" onclick="handleChangeSelectBackground()"><i class="fa fa-save mr-2"></i> Lưu</button></div>
                                     </div>
                                     <% } %>
-                                        <!-- <div class="card">
-                            <div class="card-body" id="wrapper">
-                                <ul class="nav nav-tabs">
-                                    <li class="nav-item">
-                                        <a class="nav-link active" data-toggle="collapse" data-target="#content1"
-                                            aria-expanded="true" aria-controls="content1" id="1"
-                                            onclick="handleChangeTab(1)">Nội
-                                            dung</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" data-toggle="collapse" data-target="#content2"
-                                            aria-expanded="true" aria-controls="content2" id="2"
-                                            onclick="handleChangeTab(2)">Ảnh
-                                            nền</a>
-                                    </li>
-                                </ul>
-                                <div>
-                                    <div id="content1" data-parent="#wrapper" class="collapse show">
-                                        <form class="form p-3">
-                                            <div class="form-group">
-                                                <label for="heading">Tiêu đề:</label>
-                                                <textarea class="form-control" id="heading"></textarea>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="content">Nội dung:</label>
-                                                <textarea class="form-control" id="content"></textarea>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    <div id="content2" data-parent="#wrapper" class="collapse">
-                                        <h2>Content 2</h2>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> -->
                 </div>
             </div>
         </div>
         <script src="https://cdn.tiny.cloud/1/r22hj5iot4r5z5wsadtse1lse4jdgk3b6xa1njp93fzao1z7/tinymce/5/tinymce.min.js"
             referrerpolicy="origin"></script>
         <script>
-            function handleChangeTab(params) {
-                let navs = document.getElementsByClassName('nav-link')
-                for (var i = 0; i < navs.length; i++) {
-                    navs[i].className = 'nav-link';
-                }
-                document.getElementById(params.toString()).className += " active disabled";
-            }
             tinymce.init({
                 selector: '#editor',
                 menubar: false,
@@ -130,3 +92,4 @@
                 }
             });
         </script>
+        <script src="/dist/js/background.js"></script>

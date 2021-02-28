@@ -12,7 +12,7 @@ exports.getAllBackground = async (req, res) => {
                 } else {
                     data = data.map(m => {
                         const fullpath = (m.path + m.name).replace('./public','');
-                        return {...m, fullpath: fullpath}
+                        return {fullpath: fullpath, active: m.isActive, id: m._id}
                     })
                   resolve(data);
                 }
@@ -76,13 +76,14 @@ exports.insert = async (req, res) => {
     }
 };
 
-// exports.getLastestFeature = async (id) => {
-//     try {
-//         const features = await Feature.find({
-//             active: { $eq: true }
-//         }).exec();
-//         return { success: true, data: features }
-//     } catch (error) {
-//         return { success: false }
-//     }
-// }
+exports.updateSelectedBackground = async (req, res) => {
+    try {
+        const ids = req.body.selectedBackgroundId;
+        await Background.updateMany({
+            _id: { $in : [...ids] }
+        }, { $set : { isActive : true } });
+        return { success: trues }
+    } catch (error) {
+        return { success: false }
+    }
+}

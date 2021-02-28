@@ -8,4 +8,6 @@ const BackgroundController = require('../controllers/background.controller')
 // Dashboard
 router.post('/api/background', BackgroundController.insert);
 
+router.post('/api/background/updateSelectedBackground', BackgroundController.updateSelectedBackground);
+
 module.exports = router;
